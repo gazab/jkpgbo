@@ -4,7 +4,8 @@ export default {
       12, 14, 16, 20, 24, 32, 48, 64
     ],
     colors: {
-      base: '#F1FAEE',
+      base: '#e1e2e1',
+      bl: '#f5f5f6',
       p: '#1d3557',
       pd: '#000e2e',
       pl: '#4a5e84',
@@ -40,8 +41,18 @@ export default {
     },
     buttons: {
       primary: {
-        color: 'white',
+        color: 'bl',
         bg: 'p',
+      },
+      s: {
+        color: 'black',
+        bg: 's',
       }
+    },
+    card: {
+        color: 'black',
+        bg: 'bl',
+        padding: 2,
+        margin: 2,
     }
   }
