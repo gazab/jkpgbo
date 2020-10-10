@@ -80,7 +80,7 @@ export function Table(props: { data: Home[] }) {
                         ? column.isSortedDesc
                           ? " 🔽"
                           : " 🔼"
-                        : ""}
+                        : "  "}
                     </span>
                     <div>{column?.Filter ? column.render("Filter") : null}</div>
                   </th>
@@ -102,7 +102,7 @@ export function Table(props: { data: Home[] }) {
                   })}
                 </tr>
                 {row.isExpanded ? (
-                  <tr>
+                  <tr className="expanded">
                     <td colSpan={visibleColumns.length}>
                       {/*
                           Inside it, call our renderRowSubComponent function. In reality,

@@ -7,7 +7,6 @@ export function Select(props: { options: Option[]; label: string }) {
   return (
     <>
       <Label>{props.label}</Label>
-      select: {selectedValue}
       <SelectForm
         bg="pl"
         value={selectedValue}

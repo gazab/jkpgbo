@@ -1,6 +1,6 @@
 table {
     border-collapse: separate; 
-    border-spacing: 0 1em; 
+    border-spacing: 0 .1em; 
 thead {
 
     th {
@@ -9,9 +9,15 @@ thead {
     }
 }
   tbody {
+    .expanded {
+      td {
+        border-top: .1em solid #e1e2e1;
+
+      }
+    }
     td {
       padding: 1em;
-      border: none;
+      border-top: .5em solid #e1e2e1;
     }
     tr {
       background-color: #f5f5f6;

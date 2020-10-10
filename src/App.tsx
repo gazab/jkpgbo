@@ -13,13 +13,21 @@ import "./App.scss";
 import { getBostadsregistretData } from "./api/bostadsregistret";
 import { Home } from "./types/Home";
 import { getVatterhemData } from "./api/vatterhem";
+import { Slider } from "@rebass/forms";
 
 function App() {
-  const { data: bostadsregistretData, isLoading: bostadsregistretIsLoading } = useQuery<Home[]>( "bostadsregistret", getBostadsregistretData);
-  const { data: vatterhemData, isLoading: vatterhemIsLoading } = useQuery<Home[]>( "vatterhem", getVatterhemData);
+  const {
+    data: bostadsregistretData,
+    isLoading: bostadsregistretIsLoading,
+  } = useQuery<Home[]>("bostadsregistret", getBostadsregistretData);
+  const { data: vatterhemData, isLoading: vatterhemIsLoading } = useQuery<
+    Home[]
+  >("vatterhem", getVatterhemData);
 
-
-  let combinedData = [...bostadsregistretData||[], ...vatterhemData||[]];
+  let combinedData = [
+    ...(bostadsregistretData || []),
+    ...(vatterhemData || []),
+  ];
   let isAnyLoading = bostadsregistretIsLoading || vatterhemIsLoading;
 
   // TODO: _Move
@@ -38,7 +46,7 @@ function App() {
           minHeight: "100vh",
           gridTemplateAreas: [
             '"header" "nav" "main"  "footer"',
-            '"header header" "nav main" "footer footer"',
+            '"nav header" "nav main" "footer footer"',
           ],
           gridTemplateColumns: ["1fr", "300px 1fr"],
           gridTemplateRows: [
@@ -48,15 +56,11 @@ function App() {
         }}
       >
         <Box
-          bg="pd"
+          bg="bl"
           sx={{
             gridArea: "header",
           }}
-        >
-          <Heading p="2" color="sl">
-            JKPGBo
-          </Heading>
-        </Box>
+        ></Box>
         <Box
           p="2"
           bg="base"
@@ -64,24 +68,45 @@ function App() {
             gridArea: "main",
           }}
         >
-          <Flex alignItems="center" justifyContent="center">
-          {isAnyLoading ?
-            <p>Loading!</p> :
-            <Table data={combinedData ?? [] }/>
-          }
-            
+          <Flex
+            justifyContent="center"
+            style={{
+              overflowY: "scroll",
+              maxHeight: "100vh",
+            }}
+          >
+            {isAnyLoading ? (
+              <p>Loading!</p>
+            ) : (
+              <Table data={combinedData ?? []} />
+            )}
           </Flex>
 
           <ReactQueryDevtools />
         </Box>
         <Box
-        p='4'
-          bg="p"
+          p="4"
+          color="white"
+          bg="pd"
+          style={{ borderTopRightRadius: "4em" }}
           sx={{
             gridArea: "nav",
           }}
         >
+          <Heading>JKPGBo</Heading>
+          <hr />
+          <Heading>Filter</Heading>
           <Select label="Stad" options={cities} />
+          Rum
+          <Slider
+            id="percent"
+            name="percent"
+            defaultValue={1}
+            min={1}
+            max={4}
+          />
+          <Select label="Stad" options={cities} />
+          <Select label="Källa" options={cities} />
         </Box>
         <Box
           bg="pd"
