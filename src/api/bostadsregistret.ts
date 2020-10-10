@@ -9,7 +9,8 @@ export function getBostadsregistretData(): Promise<Home[]> {
 
 function mapBostadsregistretModelToHome(input: BostadsregistretHome): Home {
     let output = input as unknown as Home;
-    output.originalData = input;
+    output.city = input.cityName;
+    output.partOfCity = input.suburbName;
     output.source = "Bostadsregistret";
     return output;
 }

@@ -11,7 +11,7 @@ export function getVatterhemData(): Promise<Home[]> {
 function mapVatterhemModelToHome(input: VatterhemModel): Home {
     let output: Home = {
         address: input.StreetName + " " + input.StreetNo,
-        cityName: input.PlaceName,
+        city: input.PlaceName,
         id: idPrefix+input.RowId,
         area: input.ObjectAreaSort,
         rent: input.RentPerMonthSort,
@@ -19,9 +19,8 @@ function mapVatterhemModelToHome(input: VatterhemModel): Home {
         floor: Number.parseInt(input.ObjectFloor),
         entryDate: input.EndPeriodMPDateString,
         source: "Vätterhem",
-        originalData: null,
+        partOfCity: input.SeekAreaDescription,
     }
-    output.originalData = input;
     output.source = "Vätterhem";
     return output;
 }
