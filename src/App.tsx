@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { ThemeProvider } from "emotion-theming";
 import theme from "./theme";
 
-import { Heading, Box, Button, Flex } from "rebass";
+import { Heading, Box, Flex } from "rebass";
 import { BostadsregistretHome } from "./types/BostadsregistretHome";
 import { Table } from "./components/Table";
 import "./App.scss";
