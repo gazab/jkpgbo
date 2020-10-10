@@ -11,7 +11,6 @@ import './Table.scss'
    const columns = React.useMemo<any>(
      () => [
       {
-        // Make an expander cell
         Header: () => null, // No header
         id: 'expander', // It needs an ID
         Cell: ({ row }: any) => (
@@ -28,9 +27,8 @@ import './Table.scss'
        { Header: "Tillträde", accessor: "entryDate", },
        { Header: "Hyra", accessor: "rent", },
        {
-        // Make an expander cell
-        Header: () => null, // No header
-        id: 'info', // It needs an ID
+        Header: () => null,
+        id: 'info',
         Cell: ({ row }: any) => (
           <span>
             <Button>Mer info</Button>
