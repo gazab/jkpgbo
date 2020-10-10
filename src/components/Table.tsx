@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTable } from 'react-table'
+import { useSortBy, useTable } from 'react-table'
 import { Home } from '../types/Home'
 
  export function Table(props: {data: Home[]}) {
@@ -24,7 +24,9 @@ import { Home } from '../types/Home'
      headerGroups,
      rows,
      prepareRow,
-   } = useTable({ columns, data })
+   } = useTable({ columns, data },
+    useSortBy
+    )
  
    return (
      <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
@@ -33,7 +35,7 @@ import { Home } from '../types/Home'
            <tr {...headerGroup.getHeaderGroupProps()}>
              {headerGroup.headers.map(column => (
                <th
-                 {...column.getHeaderProps()}
+                 {...column.getHeaderProps(column.getSortByToggleProps())}
                  style={{
                    borderBottom: 'solid 3px red',
                    background: 'aliceblue',
@@ -42,6 +44,13 @@ import { Home } from '../types/Home'
                  }}
                >
                  {column.render('Header')}
+                 <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                      : ''}
+                  </span>
                </th>
              ))}
            </tr>
