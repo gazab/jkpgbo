@@ -1,7 +1,8 @@
 import { City } from "./City";
+import { DataSource } from "./DataSource";
 
 export interface Home {
-    id:                               number;
+    id:                               string;
     cityName:                         City;
     address:                          string;
     area:                             number;
@@ -9,4 +10,6 @@ export interface Home {
     rent:                             number;
     floor:                            number;
     entryDate:                        string;
+    originalData:                     any;
+    source: DataSource;
 }

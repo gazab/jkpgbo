@@ -26,6 +26,7 @@ import './Table.scss'
        { Header: "Våning", accessor: "floor", },
        { Header: "Tillträde", accessor: "entryDate", },
        { Header: "Hyra", accessor: "rent", },
+       { Header: "Källa", accessor: "source", },
        {
         Header: () => null,
         id: 'info',

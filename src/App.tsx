@@ -5,18 +5,19 @@ import { ThemeProvider } from "emotion-theming";
 import theme from "./theme";
 
 import { Heading, Box, Flex } from "rebass";
-import { BostadsregistretHome } from "./types/BostadsregistretHome";
 import { Table } from "./components/Table";
 import "./App.scss";
-
-const bostadsregistretDataUrl =
-  "https://raw.githubusercontent.com/gazab/bostadsregistret_jkpg_history/main/bostadsregistret_jkpg.json";
+import { getBostadsregistretData } from "./api/bostadsregistret";
+import { Home } from "./types/Home";
+import { getVatterhemData } from "./api/vatterhem";
 
 function App() {
-  const { data, isLoading } = useQuery<BostadsregistretHome[]>(
-    "apartments",
-    () => fetch(bostadsregistretDataUrl).then((res) => res.json())
-  );
+  const { data: bostadsregistretData, isLoading: bostadsregistretIsLoading } = useQuery<Home[]>( "bostadsregistret", getBostadsregistretData);
+  const { data: vatterhemData, isLoading: vatterhemIsLoading } = useQuery<Home[]>( "vatterhem", getVatterhemData);
+
+
+  let combinedData = [...bostadsregistretData||[], ...vatterhemData||[]];
+  let isAnyLoading = bostadsregistretIsLoading || vatterhemIsLoading;
 
   return (
     <ThemeProvider theme={theme}>
@@ -52,9 +53,9 @@ function App() {
           }}
         >
           <Flex alignItems="center" justifyContent="center">
-          {isLoading ?
+          {isAnyLoading ?
             <p>Loading!</p> :
-            <Table data={data ?? [] }/>
+            <Table data={combinedData ?? [] }/>
           }
             
           </Flex>
