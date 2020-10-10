@@ -4,10 +4,10 @@ import { useQuery } from "react-query";
 import { ThemeProvider } from "emotion-theming";
 import theme from "./theme";
 
-import { Heading, Box, Card, Text, Button, Flex } from "rebass";
-import "./App.css";
+import { Heading, Box, Button, Flex } from "rebass";
 import { BostadsregistretHome } from "./types/BostadsregistretHome";
 import { Table } from "./components/Table";
+import "./App.scss";
 
 const bostadsregistretDataUrl =
   "https://raw.githubusercontent.com/gazab/bostadsregistret_jkpg_history/main/bostadsregistret_jkpg.json";
@@ -28,7 +28,7 @@ function App() {
             '"header" "nav" "main"  "footer"',
             '"header header" "nav main" "footer footer"',
           ],
-          gridTemplateColumns: ["1fr", "200px 1fr"],
+          gridTemplateColumns: ["1fr", "300px 1fr"],
           gridTemplateRows: [
             "min-content min-content 1fr min-content",
             "min-content 1fr",
@@ -41,18 +41,24 @@ function App() {
             gridArea: "header",
           }}
         >
-          <Heading color="b">JKPGBo</Heading>
+          <Heading p='2'
+          color='sl'>JKPGBo</Heading>
         </Box>
         <Box
+          p="2"
           bg="base"
           sx={{
             gridArea: "main",
           }}
         >
+          <Flex alignItems="center" justifyContent="center">
           {isLoading ?
             <p>Loading!</p> :
             <Table data={data ?? [] }/>
           }
+            
+          </Flex>
+
           <ReactQueryDevtools />
         </Box>
         <Box

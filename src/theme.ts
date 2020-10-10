@@ -6,6 +6,7 @@ export default {
     colors: {
       base: '#e1e2e1',
       bl: '#f5f5f6',
+      bd: '#afb0af',
       p: '#1d3557',
       pd: '#000e2e',
       pl: '#4a5e84',
