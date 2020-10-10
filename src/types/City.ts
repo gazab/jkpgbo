@@ -1,0 +1,1 @@
+export type City = "Jönköping" | "Nässjö" | "Vaggeryd" | "Huskvarna";
