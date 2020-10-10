@@ -5,7 +5,10 @@ import { ThemeProvider } from "emotion-theming";
 import theme from "./theme";
 
 import { Heading, Box, Flex } from "rebass";
+import { Option } from "./types/Option";
 import { Table } from "./components/Table";
+import { Select } from "./components/Select";
+
 import "./App.scss";
 import { getBostadsregistretData } from "./api/bostadsregistret";
 import { Home } from "./types/Home";
@@ -18,6 +21,14 @@ function App() {
 
   let combinedData = [...bostadsregistretData||[], ...vatterhemData||[]];
   let isAnyLoading = bostadsregistretIsLoading || vatterhemIsLoading;
+
+  // TODO: _Move
+  const tempSet = new Set<string>();
+  combinedData?.map((e: Home) => tempSet.add(e.city));
+  const cities: Option[] = [];
+  tempSet.forEach((e) => {
+    cities.push({ name: e, value: e });
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,8 +53,9 @@ function App() {
             gridArea: "header",
           }}
         >
-          <Heading p='2'
-          color='sl'>JKPGBo</Heading>
+          <Heading p="2" color="sl">
+            JKPGBo
+          </Heading>
         </Box>
         <Box
           p="2"
@@ -63,12 +75,13 @@ function App() {
           <ReactQueryDevtools />
         </Box>
         <Box
+        p='4'
           bg="p"
           sx={{
             gridArea: "nav",
           }}
         >
-          Filter
+          <Select label="Stad" options={cities} />
         </Box>
         <Box
           bg="pd"
