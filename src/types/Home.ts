@@ -11,5 +11,6 @@ export interface Home {
     rent:                             number;
     floor:                            number;
     entryDate:                        string;
+    originalData: any;
     source: DataSource;
 }

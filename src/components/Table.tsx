@@ -47,9 +47,10 @@ export function Table(props: { data: Home[] }) {
       <pre
         style={{
           fontSize: "10px",
+          maxWidth: "600px"
         }}
       >
-        <code>{JSON.stringify({ values: row.values }, null, 2)}</code>
+        <code>{JSON.stringify({ values: row.original }, null, 2)}</code>
       </pre>
     ),
     []

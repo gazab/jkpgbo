@@ -20,8 +20,8 @@ function mapVatterhemModelToHome(input: VatterhemModel): Home {
         entryDate: input.EndPeriodMPDateString,
         source: "Vätterhem",
         partOfCity: input.SeekAreaDescription,
+        originalData: input
     }
-    output.source = "Vätterhem";
     return output;
 }
 
