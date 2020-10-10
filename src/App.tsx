@@ -1,25 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ReactQueryDevtools } from 'react-query-devtools';
+import { useQuery } from 'react-query';
 import './App.css';
 
+const bostadsregistretDataUrl = "https://raw.githubusercontent.com/gazab/bostadsregistret_jkpg_history/main/bostadsregistret_jkpg.json";
+
 function App() {
+  const { data, isLoading } = useQuery<any>('apartments', () => fetch(bostadsregistretDataUrl).then(res => res.json()));
+
   return (
+    <>
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ul>
+          { isLoading ? <p>Loading!</p> :
+            data.map((apartment: any) => (<li key={apartment.id}>{apartment.address}</li>))
+          }
+        </ul>
       </header>
     </div>
+    <ReactQueryDevtools />
+    </>
   );
 }
 
