@@ -1,4 +1,6 @@
+import { getTsBuildInfoEmitOutputFilePath } from "typescript";
 import { BostadsregistretHome } from "../types/BostadsregistretHome";
+import { City } from "../types/City";
 import { Home } from "../types/Home";
 
 const apiUrl = "https://raw.githubusercontent.com/gazab/bostadsregistret_jkpg_history/main/bostadsregistret_jkpg.json";
@@ -11,7 +13,7 @@ export function getBostadsregistretData(): Promise<Home[]> {
 function mapBostadsregistretModelToHome(input: BostadsregistretHome): Home {
     let output: Home = {
         address: input.address,
-        city: input.cityName,
+        city: getCity(input),
         id: idPrefix+input.id,
         area: input.area,
         rent: input.rent,
@@ -23,4 +25,13 @@ function mapBostadsregistretModelToHome(input: BostadsregistretHome): Home {
         originalData: input
     }
     return output;
+}
+
+function getCity(input: BostadsregistretHome): City {
+    
+    if(input.cityName === "Jönköping" && input.suburbName === "Huskvarna") {
+        return "Huskvarna";
+    }
+
+    return input.cityName;
 }
